@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- 1. THEME VARIABLES --- */
+:root {
+  /* === DARK MODE (Default - "Black Ops") === */
+  --bg-app: #030303;
+  --bg-subtle: #0A0A0A;
+  --bg-card: #111111;
+  /* Dark Grey Card */
+
+  --text-primary: #EDEDED;
+  --text-secondary: #A1A1AA;
+  --text-tertiary: #52525B;
+
+  --brand-primary: #3291FF;
+  --brand-success: #27C93F;
+  --brand-danger: #FF453A;
+  --brand-warning: #FF9F0A;
+
+  --border-base: rgba(255, 255, 255, 0.08);
+  --border-highlight: rgba(255, 255, 255, 0.15);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+
+  --grid-pattern: rgba(255, 255, 255, 0.03);
+
+  --card-radius: 12px;
+
+  /* VFX Settings (Restored for Safety) */
+  --scanline-image: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 2px);
+  --bg-size: 100% 4px;
+  --overlay-opacity: 0.5;
+}
+
+/* === LIGHT MODE (Premium "Slate" Theme) === */
+[data-theme="light"] {
+  /* BACKGROUND: Soft Cool Grey (Slate-100) instead of harsh white */
+  --bg-app: #F1F5F9;
+
+  /* SIDEBAR/HOVER: White or very light grey */
+  --bg-subtle: #E2E8F0;
+
+  /* CARDS: Pure White (Pops against the grey background) */
+  --bg-card: #FFFFFF;
+
+  /* TEXT: High Contrast Charcoal */
+  --text-primary: #0F172A;
+  /* Slate 900 */
+  --text-secondary: #475569;
+  /* Slate 600 */
+  --text-tertiary: #94A3B8;
+  /* Slate 400 */
+
+  --brand-primary: #2563EB;
+
+  /* BORDERS: Subtle definition */
+  --border-base: #CBD5E1;
+  /* Slate 300 */
+  --border-highlight: #94A3B8;
+
+  /* SHADOWS: Soft and diffused for depth */
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+
+  /* GRID: Barely visible texture (2% opacity) */
+  --grid-pattern: rgba(0, 0, 0, 0.02);
+}
+
+/* --- GLOBAL STYLES --- */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: 'Inter', 'JetBrains Mono', sans-serif;
+  overflow: hidden;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* GRID BACKGROUND */
+  background-image:
+    linear-gradient(var(--grid-pattern) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-pattern) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 2px;
+}
+
+/* --- UTILITIES --- */
+
+/* The Panel (Card) */
+.panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-card);
+
+  /* Slight blur for that premium feel, if supported */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition: all 0.2s ease-in-out;
+}
+
+.panel:hover {
+  border-color: var(--border-highlight);
+  transform: translateY(-1px);
+  /* Micro-interaction lift */
+}
+
+/* Typography Helpers */
+.text-main {
+  color: var(--text-primary);
+}
+
+.text-muted {
+  color: var(--text-secondary);
+}
+
+.text-dim {
+  color: var(--text-tertiary);
+}
+
+.text-brand {
+  color: var(--brand-primary);
+}
+
+/* Status Colors */
+.text-success {
+  color: var(--brand-success);
+}
+
+.text-danger {
+  color: var(--brand-danger);
+}
+
+.text-warning {
+  color: var(--brand-warning);
+}
+
+/* Sidebar Specifics */
+.sidebar-container {
+  background: var(--bg-app);
+  border-right: 1px solid var(--border-base);
+}
+
+/* Active State */
+.sidebar-item-active {
+  background: var(--bg-card);
+  /* White in light mode, Dark in dark mode */
+  color: var(--text-primary);
+  border: 1px solid var(--border-base);
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
